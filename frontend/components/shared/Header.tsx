@@ -9,7 +9,7 @@ export default function Header() {
   const pathname = usePathname();
 
   return (
-    <header className=' items-center sm:text-left h-24 px-5'>
+    <header className='flex items-center justify-between sm:text-left h-24 px-5'>
       <nav className='flex flex-row md:gap-4 items-center h-full'>
         <Link href={{ pathname: '/' }} prefetch={false}>
           <div className='relative w-14 h-14'>
@@ -34,6 +34,28 @@ export default function Header() {
           </Link>
         ))}
       </nav>
+      <div className='flex gap-5'>
+        <div className='flex justify-center items-center w-12 aspect-square bg-khaki rounded-full'>
+          <div className='relative w-8 h-8'>
+            <Image
+              src='/search.svg'
+              alt='search'
+              fill
+              className='object-cover'
+            />
+          </div>
+        </div>
+        <div className='flex justify-center items-center w-12 aspect-square bg-pink rounded-full'>
+          <div className='relative w-6 aspect-square '>
+            <Image
+              src='/heart.svg'
+              alt='search'
+              fill
+              className='object-cover'
+            />
+          </div>
+        </div>
+      </div>
     </header>
   );
 }
