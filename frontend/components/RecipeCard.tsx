@@ -11,8 +11,8 @@ const RecipeCard: React.FC<Props> = ({ item }) => {
     return <p>Loading...</p>;
   } else
     return (
-      <div className='flex gap-5 '>
-        <div className='relative w-60 aspect-square rounded-lg overflow-hidden'>
+      <div className='flex items-center gap-5'>
+        <div className='relative max-w-60 w-full aspect-square rounded-lg overflow-hidden'>
           <Image
             src={`http://localhost:8080${item?.image}`}
             fill
@@ -20,7 +20,7 @@ const RecipeCard: React.FC<Props> = ({ item }) => {
             className='object-cover'
           />
         </div>
-        <div className='p-5 flex flex-col gap-2'>
+        <div className='px-5 flex flex-col gap-2'>
           <h2 className='font-bold text-xl '>{item.name}</h2>
           <p>{item.instructions}</p>
           <div>

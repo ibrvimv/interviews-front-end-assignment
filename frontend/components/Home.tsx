@@ -1,11 +1,10 @@
-// components/Home.js
-
 'use client';
 
 import { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { RecipeItem } from '@/types/types';
 import RecipeCard from './RecipeCard';
+import Image from 'next/image';
 
 type HomeProps = {
   initialData: RecipeItem[];
@@ -43,8 +42,62 @@ const Home: React.FC<HomeProps> = ({ initialData }) => {
 
   return (
     <>
-      <div className='flex px-5'>
-        <div className='max-w-lg w-full'></div>
+      <div className='flex px-5 gap-5'>
+        <div className='max-w-lg w-full'>
+          <h2 className='text-xl font-bold mb-10'>RecipeBook</h2>
+          <form action='' className='flex flex-col gap-7'>
+            <div id='search' className='relative'>
+              <label className='block px-3 text-sm text-black  mb-3 relative max-w-md w-full '>
+                Search by Name
+              </label>
+              <input
+                className='max-w-md w-full py-4 px-3 rounded-xl text-black  focus:outline-none'
+                id='searchByName'
+                type='text'
+                placeholder='Enter recipe name'
+              />
+            </div>
+            <div id='filter'>
+              <div className='block px-3 text-sm text-black  mb-3  max-w-md w-full '>
+                Select category
+              </div>
+              <div className='flex gap-5'>
+                <div className='relative w-16 aspect-square '>
+                  <Image
+                    src='/spicy.svg'
+                    alt='spicy'
+                    fill
+                    className='object-cover'
+                  />
+                </div>
+                <div className='relative w-16 aspect-square '>
+                  <Image
+                    src='/vegan.svg'
+                    alt='vegan'
+                    fill
+                    className='object-cover'
+                  />
+                </div>
+                <div className='relative w-16 aspect-square '>
+                  <Image
+                    src='/gluten-free.svg'
+                    alt='gluten free'
+                    fill
+                    className='object-cover'
+                  />
+                </div>
+                <div className='relative w-16 aspect-square '>
+                  <Image
+                    src='/top.svg'
+                    alt='top rated'
+                    fill
+                    className='object-cover'
+                  />
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
         <div>
           <ul className='flex flex-col gap-5'>
             {data.map((item, index) => (
