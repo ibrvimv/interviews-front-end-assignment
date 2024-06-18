@@ -11,6 +11,7 @@ const config: Config = {
       colors: {
         black: '#111111',
         green: '#88BBAF',
+        khaki: '#E5DABD',
         red: '#CD6346',
         pink: '#F9E4DD',
         back: '#F8F5ED',
