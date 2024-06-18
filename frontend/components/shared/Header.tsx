@@ -11,6 +11,7 @@ export default function Header() {
   return (
     <header className='flex items-center justify-between sm:text-left h-24 px-5'>
       <nav className='flex flex-row md:gap-4 items-center h-full'>
+        {/* Logo */}
         <Link href={{ pathname: '/' }} prefetch={false}>
           <div className='relative w-14 h-14'>
             <Image
@@ -21,6 +22,7 @@ export default function Header() {
             />
           </div>
         </Link>
+        {/* main nav */}
         {config.nav.map((item, index) => (
           <Link
             className={`text-base px-3 py-2 hover:text-secondary  transition-colors duration-100 ${
@@ -34,6 +36,7 @@ export default function Header() {
           </Link>
         ))}
       </nav>
+      {/* search and favourite navs */}
       <div className='flex gap-5'>
         <div className='flex justify-center items-center w-12 aspect-square bg-khaki rounded-full'>
           <div className='relative w-8 h-8'>

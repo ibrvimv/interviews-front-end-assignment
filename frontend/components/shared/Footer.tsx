@@ -9,6 +9,7 @@ export default function Footer() {
       <p>
         Created by{' '}
         <a
+          target='_blank'
           className='font-bold uppercase text-secondary transition-all duration-100 animate-pulse'
           href={config.authorUrl}
         >
