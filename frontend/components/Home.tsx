@@ -5,6 +5,7 @@
 import { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { RecipeItem } from '@/types/types';
+import RecipeCard from './RecipeCard';
 
 type HomeProps = {
   initialData: RecipeItem[];
@@ -41,19 +42,26 @@ const Home: React.FC<HomeProps> = ({ initialData }) => {
   };
 
   return (
-    <div>
-      <ul className='flex flex-col gap-80'>
-        {data.map((item, index) => (
-          <li key={index}>{item.name}</li>
-        ))}
-      </ul>
-      {loading && (
-        <div className='flex items-center justify-center h-52'>
-          <p>Loading...</p>
+    <>
+      <div className='flex px-5'>
+        <div className='max-w-lg w-full'></div>
+        <div>
+          <ul className='flex flex-col gap-5'>
+            {data.map((item, index) => (
+              <li key={index}>
+                <RecipeCard item={item} />
+              </li>
+            ))}
+          </ul>
+          {loading && (
+            <div className='flex items-center justify-center h-52'>
+              <p>Loading...</p>
+            </div>
+          )}
         </div>
-      )}
+      </div>
       <div ref={ref} />
-    </div>
+    </>
   );
 };
 

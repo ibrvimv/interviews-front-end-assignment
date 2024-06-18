@@ -9,7 +9,7 @@ export default function Header() {
   const pathname = usePathname();
 
   return (
-    <header className='flex items-center justify-between sm:text-left h-24 px-5'>
+    <header className='flex items-center justify-between  sm:text-left h-24 px-5'>
       <nav className='flex flex-row md:gap-4 items-center h-full'>
         {/* Logo */}
         <Link href={{ pathname: '/' }} prefetch={false}>

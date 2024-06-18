@@ -1,5 +1,3 @@
-import { Url } from 'next/dist/shared/lib/router/router';
-
 export type RecipeItem = {
   id: string;
   name: string;
@@ -8,5 +6,5 @@ export type RecipeItem = {
   cuisineId: string;
   dietId: string;
   difficultyId: string;
-  image: Url;
+  image: string;
 };
