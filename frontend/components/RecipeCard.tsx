@@ -11,8 +11,8 @@ const RecipeCard: React.FC<Props> = ({ item }) => {
     return <p>Loading...</p>;
   } else
     return (
-      <div className='flex items-center gap-5'>
-        <div className='relative max-w-60 w-full aspect-square rounded-lg overflow-hidden'>
+      <div className='flex items-center gap-5 bg-white hover:shadow-2xl hover:shadow-green transition-all duration-200 rounded-xl'>
+        <div className='relative max-w-60 w-full aspect-square rounded-l-xl overflow-hidden'>
           <Image
             src={`http://localhost:8080${item?.image}`}
             fill
