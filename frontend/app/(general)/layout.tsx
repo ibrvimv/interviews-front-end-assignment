@@ -1,7 +1,8 @@
-import Header from '../../components/shared/Header';
-import Footer from '../../components/shared/Footer';
+import Header from '@/components/shared/Header';
+import Footer from '@/components/shared/Footer';
 
 import { Montserrat } from 'next/font/google';
+import LenisScroll from '@/components/LenisScroll';
 
 const ibm_plex_mono = Montserrat({
   weight: ['400', '700'],
@@ -16,9 +17,10 @@ export default async function RootLayout({
     <main className={ibm_plex_mono.className}>
       <div>
         <Header />
-        <main>{children}</main>
+        <main className='mt-24'>{children}</main>
       </div>
       <Footer />
+      <LenisScroll />
     </main>
   );
 }
