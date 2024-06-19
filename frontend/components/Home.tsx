@@ -4,11 +4,8 @@ import { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { RecipeItem } from '@/types/types';
 import RecipeCard from './RecipeCard';
-import Image from 'next/image';
-import FilterCategory from './FilterCategory';
-import Search from './Search';
-import LevelButton from './LevelButton';
-import FilterSelect from './FilterSelect';
+import Welcome from './Welcome';
+import FilterModal from './FilterModal';
 
 type HomeProps = {
   initialData: RecipeItem[];
@@ -25,6 +22,7 @@ const Home: React.FC<HomeProps> = ({ initialData }) => {
   const [data, setData] = useState(initialData);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [openFilterModal, setOpenFilterModal] = useState(false);
 
   const { ref, inView } = useInView({
     threshold: 1,
@@ -47,41 +45,20 @@ const Home: React.FC<HomeProps> = ({ initialData }) => {
     setLoading(false);
   };
 
-  const cuisines = [
-    'Italian',
-    'American',
-    'Mexican',
-    'Indian',
-    'Japanese',
-    'Spanish',
-    'French',
-    'Greek',
-    'Thai',
-    'British',
-    'Russian',
-    'Middle Eastern',
-    'North African',
-    'Korean',
-  ];
-  const diets = [
-    'Vegetarian',
-    'Mediterranean',
-    'Non-Vegetarian',
-    'Pescatarian',
-  ];
-  const difficulty = ['Easy', 'Medium', 'Hard'];
+  const toggleFilterModal = () => {
+    setOpenFilterModal(!openFilterModal);
+  };
 
   return (
     <>
-      <div className='flex px-5 gap-5'>
-        <div className='max-w-lg w-full'>
-          <h2 className='text-xl font-bold mb-10'>RecipeBook</h2>
-          <form action='' className='flex flex-col gap-7'>
-            <Search />
-            <FilterSelect title='Select difficulty' data={difficulty} />
-            <FilterSelect title='Select Diet' data={diets} />
-            <FilterSelect title='Select Cuisines' data={cuisines} />
-          </form>
+      <div className='flex  gap-5'>
+        <div className='max-w-lg w-full relative'>
+          <button onClick={toggleFilterModal}>Filter</button>
+          <FilterModal
+            openFilterModal={openFilterModal}
+            toggleFilterModal={toggleFilterModal}
+          />
+          <Welcome />
         </div>
         <div className='w-full'>
           <ul className='flex flex-col gap-5'>
