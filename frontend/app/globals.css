@@ -25,6 +25,13 @@ body {
     rgb(var(--background-start-rgb)); */;
 }
 
+h2 {
+  @apply text-lg font-bold mb-2;
+}
+section {
+  @apply mb-4;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
