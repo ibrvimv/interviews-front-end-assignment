@@ -17,7 +17,7 @@ export default async function RootLayout({
     <main className={ibm_plex_mono.className}>
       <div>
         <Header />
-        <main className='mt-24'>{children}</main>
+        <main className='mt-40 px-8'>{children}</main>
       </div>
       <Footer />
       <LenisScroll />

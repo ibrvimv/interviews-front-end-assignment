@@ -1,11 +1,11 @@
 import React from 'react';
 import LevelButton from './LevelButton';
 
-type PropsTypes = {
+type PropsType = {
   title: string;
   data: Array<string>;
 };
-const FilterSelect: React.FC<PropsTypes> = ({ data, title }) => {
+const FilterSelect: React.FC<PropsType> = ({ data, title }) => {
   if (!data) return null;
   else {
     return (
