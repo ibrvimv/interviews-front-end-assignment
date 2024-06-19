@@ -8,6 +8,7 @@ import Image from 'next/image';
 import FilterCategory from './FilterCategory';
 import Search from './Search';
 import LevelButton from './LevelButton';
+import FilterSelect from './FilterSelect';
 
 type HomeProps = {
   initialData: RecipeItem[];
@@ -46,6 +47,30 @@ const Home: React.FC<HomeProps> = ({ initialData }) => {
     setLoading(false);
   };
 
+  const cuisines = [
+    'Italian',
+    'American',
+    'Mexican',
+    'Indian',
+    'Japanese',
+    'Spanish',
+    'French',
+    'Greek',
+    'Thai',
+    'British',
+    'Russian',
+    'Middle Eastern',
+    'North African',
+    'Korean',
+  ];
+  const diets = [
+    'Vegetarian',
+    'Mediterranean',
+    'Non-Vegetarian',
+    'Pescatarian',
+  ];
+  const difficulty = ['Easy', 'Medium', 'Hard'];
+
   return (
     <>
       <div className='flex px-5 gap-5'>
@@ -53,48 +78,9 @@ const Home: React.FC<HomeProps> = ({ initialData }) => {
           <h2 className='text-xl font-bold mb-10'>RecipeBook</h2>
           <form action='' className='flex flex-col gap-7'>
             <Search />
-            <div>
-              <label className='block px-3 text-sm text-black  mb-3 relative max-w-md w-full '>
-                Select difficulty
-              </label>
-              <div className='flex gap-2 max-w-md  flex-1'>
-                <LevelButton level='easy' />
-                <LevelButton level='medium' />
-                <LevelButton level='hard' />
-              </div>
-            </div>
-            <div>
-              <label className='block px-3 text-sm text-black  mb-3 relative max-w-md w-full '>
-                Select Diet
-              </label>
-              <div className='flex gap-2 max-w-md flex-wrap'>
-                <LevelButton level='Vegetarian' />
-                <LevelButton level='Mediterranean' />
-                <LevelButton level='Non-Vegetarian' />
-                <LevelButton level='Pescatarian' />
-              </div>
-            </div>
-            <div>
-              <label className='block px-3 text-sm text-black  mb-3 relative max-w-md w-full '>
-                Select Cuisines
-              </label>
-              <div className='flex gap-2 max-w-md flex-wrap'>
-                <LevelButton level='Italian' />
-                <LevelButton level='American' />
-                <LevelButton level='Mexican' />
-                <LevelButton level='Indian' />
-                <LevelButton level='Japanese' />
-                <LevelButton level='Spanish' />
-                <LevelButton level='French' />
-                <LevelButton level='Greek' />
-                <LevelButton level='Thai' />
-                <LevelButton level='British' />
-                <LevelButton level='Russian' />
-                <LevelButton level='Middle Eastern' />
-                <LevelButton level='North African' />
-                <LevelButton level='Korean' />
-              </div>
-            </div>
+            <FilterSelect title='Select difficulty' data={difficulty} />
+            <FilterSelect title='Select Diet' data={diets} />
+            <FilterSelect title='Select Cuisines' data={cuisines} />
           </form>
         </div>
         <div className='w-full'>
