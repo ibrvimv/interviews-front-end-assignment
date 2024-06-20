@@ -10,7 +10,7 @@ export default function Footer() {
         Created by{' '}
         <a
           target='_blank'
-          className='font-bold uppercase text-secondary transition-all duration-100 animate-pulse'
+          className='font-bold uppercase text-secondary transition-all duration-50 animate-pulse'
           href={config.authorUrl}
         >
           {config.author}

@@ -5,7 +5,7 @@ type Level = {
 };
 const LevelButton: React.FC<Level> = ({ level }) => {
   return (
-    <div className='uppercase flex justify-center items-center py-4 px-2 rounded-xl flex-auto bg-white text-gray-400 hover:text-black transition-all duration-200 cursor-pointer '>
+    <div className='flex justify-center items-center py-3 px-2 rounded-xl flex-auto bg-white text-black hover:text-green hover:shadow-2xl hover:shadow-green transition-all duration-50 cursor-pointer '>
       {level}
     </div>
   );

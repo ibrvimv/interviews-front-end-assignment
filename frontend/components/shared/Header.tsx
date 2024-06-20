@@ -34,9 +34,8 @@ export default function Header() {
         {/* main nav */}
         {config.nav.map((item, index) => (
           <Link
-            className={`text-base px-3  hover:text-green transition-all duration-200   ${
-              pathname === item.path ? 'text-secondary' : ''
-            }`}
+            className={`text-base px-3  hover:text-green transition-all duration-50   ${pathname === item.path ? 'text-secondary' : ''
+              }`}
             key={index}
             href={{ pathname: item.path }}
             prefetch={false}

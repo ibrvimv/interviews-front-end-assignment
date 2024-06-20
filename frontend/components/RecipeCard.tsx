@@ -14,7 +14,7 @@ const RecipeCard: React.FC<Props> = ({ item }) => {
   } else
     return (
       <Link href={`/recipes/${item.id}`}>
-        <div className='flex items-center gap-5 bg-white hover:shadow-2xl hover:shadow-green transition-all duration-200 rounded-xl'>
+        <div className='flex items-center gap-5 bg-white hover:shadow-2xl hover:shadow-green transition-all duration-50 rounded-xl'>
           <div className='relative max-w-60 w-full aspect-square rounded-l-xl overflow-hidden'>
             <Image
               src={`http://localhost:8080${item?.image}`}

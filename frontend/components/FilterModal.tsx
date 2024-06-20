@@ -27,16 +27,17 @@ const FilterModal: React.FC = ({
 }) => {
   return (
     <div
-      className={`fixed top-36 left-8  z-40 rounded-xl  ${'block'
-        }`}
+      className='fixed top-40 left-8  z-40 block '
     >
-      <div className='flex p-6 flex-col gap-7 relative'>
+      <div className='flex p-6 flex-col gap-7 rounded-xl border-4 border-white mb-2'>
         <Search />
+      </div>
+      <div className='flex p-6 flex-col gap-7 rounded-xl border-4 border-white'>
         <FilterSelect title='Select difficulty' data={difficulty} />
         <FilterSelect title='Select Diet' data={diets} />
         <FilterSelect title='Select Cuisines' data={cuisines} />
       </div>
-    </div>
+    </div >
   );
 };
 
