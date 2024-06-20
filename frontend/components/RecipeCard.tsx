@@ -1,9 +1,11 @@
 import React from 'react';
 import { RecipeItem } from '@/types/types';
 import Image from 'next/image';
+import Link from 'next/link';
 
 type Props = {
   item: RecipeItem;
+
 };
 
 const RecipeCard: React.FC<Props> = ({ item }) => {
@@ -11,31 +13,33 @@ const RecipeCard: React.FC<Props> = ({ item }) => {
     return <p>Loading...</p>;
   } else
     return (
-      <div className='flex items-center gap-5 bg-white hover:shadow-2xl hover:shadow-green transition-all duration-200 rounded-xl'>
-        <div className='relative max-w-60 w-full aspect-square rounded-l-xl overflow-hidden'>
-          <Image
-            src={`http://localhost:8080${item?.image}`}
-            fill
-            alt={item.name}
-            className='object-cover'
-          />
-        </div>
-        <div className='px-5 flex flex-col gap-2'>
-          <h2 className='font-bold text-xl '>{item.name}</h2>
-          <p>{item.instructions}</p>
-          <div>
-            {item.ingredients.map((ingredient, index) => {
-              return (
-                <p className='text-xs font-thin' key={index}>
-                  {ingredient}
-                </p>
-              );
-            })}
+      <Link href={`/recipes/${item.id}`}>
+        <div className='flex items-center gap-5 bg-white hover:shadow-2xl hover:shadow-green transition-all duration-200 rounded-xl'>
+          <div className='relative max-w-60 w-full aspect-square rounded-l-xl overflow-hidden'>
+            <Image
+              src={`http://localhost:8080${item?.image}`}
+              fill
+              alt={item.name}
+              className='object-cover'
+            />
           </div>
-          <p className='text-xs font-thin'>diet: {item.dietId}</p>
-          <p className='text-xs font-thin'>difficulty: {item.difficultyId}</p>
+          <div className='px-5 flex flex-col gap-2'>
+            <h2 className='font-bold text-xl '>{item.name}</h2>
+            <p>{item.instructions}</p>
+            <div>
+              {item.ingredients.map((ingredient, index) => {
+                return (
+                  <p className='text-xs font-thin' key={index}>
+                    {ingredient}
+                  </p>
+                );
+              })}
+            </div>
+            <p className='text-xs font-thin'>diet: {item.dietId}</p>
+            <p className='text-xs font-thin'>difficulty: {item.difficultyId}</p>
+          </div>
         </div>
-      </div>
+      </Link>
     );
 };
 
