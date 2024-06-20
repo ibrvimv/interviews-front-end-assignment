@@ -5,7 +5,6 @@ import { useInView } from 'react-intersection-observer';
 import { RecipeItems } from '@/types/types';
 import RecipeCard from './RecipeCard';
 import FilterModal from './FilterModal';
-import { getRecipeItems } from '@/app/api/api';
 
 
 // used this component separate from main home page because:
@@ -30,16 +29,13 @@ const Home = ({ initialData }: { initialData: RecipeItems }) => {
 
   const loadMoreData = async () => {
     setLoading(true);
-    try {
-      const newData = await getRecipeItems(page)
-      setData((prevData) => [...prevData, ...newData]);
-      setPage(page + 1);
-    } catch (error) {
-      console.error('Error fetching recipes:', error);
-    }
-    finally {
-      setLoading(false);
-    }
+    const res = await fetch(
+      `http://localhost:8080/recipes?_page=${page + 1}&_limit=5`
+    );
+    const newData = await res.json();
+    setData((prevData) => [...prevData, ...newData]);
+    setPage(page + 1);
+    setLoading(false);
   };
 
   return (

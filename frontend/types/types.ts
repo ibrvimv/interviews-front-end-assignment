@@ -11,10 +11,13 @@ export type RecipeItem = {
 
 export type RecipeItems = Array<RecipeItem>
 
-
-export type Cuisines = Array<string>
-export type Diets = Array<string>
-export type Difficulties = Array<string>
+export type FilterData = {
+  id: string;
+  name: string;
+}
+export type Cuisines = Array<FilterData>
+export type Diets = Array<FilterData>
+export type Difficulties = Array<FilterData>
 
 
 export type Comment = {

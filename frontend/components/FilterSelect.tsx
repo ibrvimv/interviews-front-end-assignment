@@ -1,8 +1,9 @@
 import React from 'react';
 import LevelButton from './LevelButton';
+import { FilterData } from '@/types/types';
 
 
-const FilterSelect = ({ data, title }: { data: Array<string>, title: string }) => {
+const FilterSelect = ({ data, title }: { data: Array<FilterData>, title: string }) => {
   if (!data) return null;
   else {
     return (
@@ -11,8 +12,8 @@ const FilterSelect = ({ data, title }: { data: Array<string>, title: string }) =
           {title}
         </label>
         <div className='flex gap-2 max-w-md flex-wrap'>
-          {data.map((item, key) => {
-            return <LevelButton level={item} key={key} />;
+          {data.map((item) => {
+            return <LevelButton level={item.name} key={item.id} />;
           })}
         </div>
       </div>
