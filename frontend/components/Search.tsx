@@ -9,7 +9,7 @@ const Search = () => {
       </label>
       <div className='flex items-center gap-2'>
         <input
-          className='max-w-md w-full flex-1 flex-grow py-4 px-3 rounded-xl text-black  focus:outline-none'
+          className='max-w-md w-full flex-1 flex-grow py-4 px-3 rounded-xl text-black  focus:outline-green focus:outline-2'
           id='searchByName'
           type='text'
           placeholder='Enter recipe name'

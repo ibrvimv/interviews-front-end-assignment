@@ -1,3 +1,4 @@
+import Button from './Button';
 import FilterSelect from './FilterSelect';
 import Search from './Search';
 import CloseIcon from '@mui/icons-material/Close';
@@ -36,6 +37,9 @@ const FilterModal: React.FC = ({
         <FilterSelect title='Select difficulty' data={difficulty} />
         <FilterSelect title='Select Diet' data={diets} />
         <FilterSelect title='Select Cuisines' data={cuisines} />
+        <div className='flex justify-end'>
+          <Button text='Apply' alt='filter apply' icon={undefined} value='' />
+        </div>
       </div>
     </div >
   );

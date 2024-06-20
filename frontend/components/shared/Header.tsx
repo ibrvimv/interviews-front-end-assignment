@@ -18,7 +18,7 @@ export default function Header() {
         <Link
           href={{ pathname: '/' }}
           prefetch={false}
-          className='flex flex-col items-center'
+          className='flex flex-col items-center  '
         >
           <div className='relative w-14 h-14'>
             <Image
