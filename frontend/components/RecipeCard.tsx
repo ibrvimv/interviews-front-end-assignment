@@ -26,17 +26,21 @@ const RecipeCard: React.FC<Props> = ({ item }) => {
           <div className='px-5 flex flex-col gap-2'>
             <h2 className='font-bold text-xl '>{item.name}</h2>
             <p>{item.instructions}</p>
-            <div>
-              {item.ingredients.map((ingredient, index) => {
-                return (
-                  <p className='text-xs font-thin' key={index}>
-                    {ingredient}
-                  </p>
-                );
-              })}
+            <div className='flex gap-5'>
+              {/* <div>
+                {item.ingredients.map((ingredient, index) => {
+                  return (
+                    <p className='text-xs font-thin' key={index}>
+                      {ingredient}
+                    </p>
+                  );
+                })}
+              </div> */}
+              <div className='flex gap-5'>
+                <p className='text-xs font-thin'>diet: {item.dietId}</p>
+                <p className='text-xs font-thin'>difficulty: {item.difficultyId}</p>
+              </div>
             </div>
-            <p className='text-xs font-thin'>diet: {item.dietId}</p>
-            <p className='text-xs font-thin'>difficulty: {item.difficultyId}</p>
           </div>
         </div>
       </Link>

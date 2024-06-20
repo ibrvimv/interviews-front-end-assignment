@@ -3,6 +3,7 @@ import Footer from '@/components/shared/Footer';
 
 import { Montserrat } from 'next/font/google';
 import LenisScroll from '@/components/LenisScroll';
+import clsx from 'clsx';
 
 const ibm_plex_mono = Montserrat({
   weight: ['400', '700'],
@@ -14,7 +15,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main className={ibm_plex_mono.className}>
+    <main className={clsx(ibm_plex_mono.className, 'flex flex-col justify-between min-h-screen')} >
       <div>
         <Header />
         <main className='mt-40 px-8'>{children}</main>

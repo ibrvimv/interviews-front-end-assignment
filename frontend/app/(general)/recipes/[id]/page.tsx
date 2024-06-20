@@ -24,8 +24,34 @@ const RecipePage = async ({ params }: { params: { id: string } }) => {
   }
 
   return (
-    <div>
-      <h1>{recipe.name}</h1>
+    <div className='flex gap-5'>
+      <div className='relative w-1/2 rounded-xl aspect-video overflow-hidden'>
+        <Image src={`http://localhost:8080${recipe?.image}`} alt={recipe.name} fill className='object-cover' />
+      </div>
+      <div className='w-1/2 aspect-video'>
+        <h1 className='font-bold text-xl mb-2'>{recipe.name}</h1>
+        <div className=' flex flex-col gap-2 justify-between h-full'>
+          <div>
+            <p className='mb-5'>{recipe.instructions}</p>
+            <div >
+              <h2 className='text-md font-semibold'>
+                Ingredients:
+              </h2>
+              {recipe.ingredients.map((ingredient, index) => {
+                return (
+                  <p className='text-xs font-thin' key={index}>
+                    {ingredient}
+                  </p>
+                );
+              })}
+            </div>
+          </div>
+          <div className='flex gap-5'>
+            <p className='text-md font-thin uppercase'>diet: {recipe.dietId}</p>
+            <p className='text-md font-thin uppercase'>difficulty: {recipe.difficultyId}</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
