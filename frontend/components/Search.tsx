@@ -1,5 +1,6 @@
 import React from 'react';
 import SearchIcon from '@mui/icons-material/Search';
+import Button from './Button';
 const Search = () => {
   return (
     <div id='search' className='relative'>
@@ -13,9 +14,7 @@ const Search = () => {
           type='text'
           placeholder='Enter recipe name'
         />
-        <div className=' bg-white rounded-2xl py-4 px-5 cursor-pointer hover:text-green transition-all duration-50 hover:shadow-2xl  hover:shadow-green'>
-          <SearchIcon />
-        </div>
+        <Button icon={SearchIcon} text='' value='' alt='' />
       </div>
     </div>
   );
