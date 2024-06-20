@@ -45,20 +45,16 @@ const Home: React.FC<HomeProps> = ({ initialData }) => {
     setLoading(false);
   };
 
-  const toggleFilterModal = () => {
-    setOpenFilterModal(!openFilterModal);
-  };
+  // const toggleFilterModal = () => {
+  //   setOpenFilterModal(!openFilterModal);
+  // };
 
   return (
     <>
       <div className='flex  gap-5'>
         <div className='max-w-lg w-full relative'>
-          <button onClick={toggleFilterModal}>Filter</button>
-          <FilterModal
-            openFilterModal={openFilterModal}
-            toggleFilterModal={toggleFilterModal}
-          />
-          <Welcome />
+          <FilterModal />
+          {/* <Welcome /> */}
         </div>
         <div className='w-full'>
           <ul className='flex flex-col gap-5'>
