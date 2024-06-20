@@ -53,8 +53,8 @@ export default function Header() {
           value='add'
         />
 
-        <div className='flex justify-center items-center w-12 aspect-square bg-pink rounded-full'>
-          <div className='relative w-6 aspect-square '>
+        <div className='flex justify-center items-center w-[60px] aspect-square bg-pink rounded-full hover:bg-back border-2 border-pink transition-all duration-50'>
+          <div className='relative w-6 aspect-square hover:w-8 transition-all duration-100'>
             <Image
               src='/heart.svg'
               alt='search'

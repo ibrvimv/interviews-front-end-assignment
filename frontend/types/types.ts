@@ -8,3 +8,7 @@ export type RecipeItem = {
   difficultyId: string;
   image: string;
 };
+
+
+
+export type RecipeItems = Array<RecipeItem>

@@ -5,7 +5,7 @@ import config from '../../lib/config';
  */
 export default function Footer() {
   return (
-    <footer className='text-center text-sm py-9'>
+    <footer className='text-center text-sm py-20'>
       <p>
         Created by{' '}
         <a

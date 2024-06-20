@@ -23,9 +23,7 @@ const diets = ['Vegetarian', 'Mediterranean', 'Non-Vegetarian', 'Pescatarian'];
 const difficulty = ['Easy', 'Medium', 'Hard'];
 
 
-const FilterModal: React.FC = ({
-
-}) => {
+const FilterModal = () => {
   return (
     <div
       className='fixed top-40 left-8  z-40 block '

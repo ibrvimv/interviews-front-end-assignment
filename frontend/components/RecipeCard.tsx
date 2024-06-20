@@ -3,12 +3,7 @@ import { RecipeItem } from '@/types/types';
 import Image from 'next/image';
 import Link from 'next/link';
 
-type Props = {
-  item: RecipeItem;
-
-};
-
-const RecipeCard: React.FC<Props> = ({ item }) => {
+const RecipeCard = ({ item }: { item: RecipeItem }) => {
   if (!item) {
     return <p>Loading...</p>;
   } else
