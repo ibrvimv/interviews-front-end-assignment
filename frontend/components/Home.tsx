@@ -1,5 +1,4 @@
 'use client';
-
 import { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { RecipeItems } from '@/types/types';

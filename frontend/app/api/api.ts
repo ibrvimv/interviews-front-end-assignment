@@ -69,3 +69,16 @@ export async function getComments(): Promise<Comments> {
   return data;
 }
 
+
+//Serach
+
+export async function getRecipeByName(name: string): Promise<RecipeItems> {
+  const res = await fetch(`http://localhost:8080/recipes?_page=1&_limit=5&name=${encodeURIComponent(name)}`);
+
+  if (!res.ok) {
+    throw new Error(`HTTP error! Status: ${res.status}`);
+  }
+
+  const data: RecipeItems = await res.json();
+  return data;
+}
