@@ -14,7 +14,7 @@ const FilterSelect: React.FC<FilterSelectProps> = ({ data, title, selected, onSe
   else {
     return (
       <div>
-        <label className='block px-3 text-sm text-black  mb-3 relative max-w-md w-full '>
+        <label className='block px-3 text-sm font-medium text-black  mb-3 relative max-w-md w-full '>
           {title}
         </label>
         <div className='flex gap-2 max-w-md flex-wrap'>

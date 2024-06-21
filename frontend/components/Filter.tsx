@@ -5,7 +5,7 @@ import Search from './Search';
 import { getCuisines, getDiets, getDifficulies } from '@/app/api/api';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectCuisines, selectDiets, selectDifficulties, setCuisines, setDiets, setDifficulties, resetFilter } from '@/lib/features/recipeSlice';
+import { selectCuisines, selectDiets, selectDifficulties, setCuisines, setDiets, setDifficulties, resetFilter, resetSearch } from '@/lib/features/recipeSlice';
 
 type PropTypes = {
   handleSearch: () => void
@@ -53,7 +53,8 @@ export default function Filter({ handleSearch, searchTerm, setSearchTerm, handle
     setSelectedDiets([]);
     setSelectedCuisines([]);
     setSelectedDifficulties([]);
-    dispatch(resetFilter())
+    dispatch(resetSearch());
+    dispatch(resetFilter());
   }
 
   return (

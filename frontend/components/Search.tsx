@@ -12,7 +12,7 @@ const Search: React.FC<PropTypes> = ({ searchTerm, setSearchTerm, handleSearch }
 
   return (
     <div id='search' className='relative'>
-      <label className='block px-3 text-sm text-black  mb-3 relative max-w-md w-full '>
+      <label className='block px-3 text-sm font-medium text-black  mb-3 relative max-w-md w-full '>
         Search by Name
       </label>
       <div className='flex items-center gap-2'>
