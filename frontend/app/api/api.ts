@@ -25,7 +25,7 @@ export async function getRecipeItems(page: number, name?:string, filterCriteria?
     if (diets.length) url += `&dietId=${diets.join(',')}`;
     if (cuisines.length) url += `&cuisineId=${cuisines.join(',')}`;
     if (difficulties.length) url += `&difficultyId=${difficulties.join(',')}`;
-    console.log(url)
+
   }
   const res = await fetch(url);
 

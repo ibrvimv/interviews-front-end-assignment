@@ -44,13 +44,13 @@ const AddRecipe = () => {
 				body: recipeData
 			});
 			const result = await response.json();
-			console.log(result);
+
 			closeAddRecipeModal();
 		} catch (error) {
 			console.error('Error uploading recipe:', error);
 		}
 	};
-	console.log(difficulties)
+
 	return (
 		<div className={`${open ? 'block' : 'hidden'} fixed inset-0 z-50 flex flex-col  bg-back`}>
 			<div className='flex flex-col gap-2 py-10 px-32 justify-center w-full'>

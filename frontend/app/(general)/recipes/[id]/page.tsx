@@ -1,11 +1,8 @@
 
 import { Comments, RecipeItem } from '@/types/types';
 import Image from 'next/image';
-import { GetStaticPropsContext } from 'next';
 import { getComments } from '@/app/api/api';
 import Loading from '@/components/Loading';
-import { useSelector } from 'react-redux';
-import { selectDiets, selectDifficulties } from '@/lib/features/recipeSlice';
 
 const diets = [
   { id: "1", name: "Vegetarian" },
@@ -68,7 +65,7 @@ const RecipePage = async ({ params }: { params: { id: string } }) => {
                 <h2 className='text-md font-semibold'>
                   Ingredients:
                 </h2>
-                {recipe.ingredients.map((ingredient, index) => {
+                {recipe?.ingredients?.map((ingredient, index) => {
                   return (
                     <p className='text-xs font-thin' key={index}>
                       {ingredient}
@@ -88,7 +85,7 @@ const RecipePage = async ({ params }: { params: { id: string } }) => {
         <div className='text-lg font-bold'>Reviews</div>
         <div>
           {
-            comments?.map((item, key) => {
+            comments && comments.map((item, key) => {
               return <div key={key}>
                 <div className='flex flex-col'>
                   <div>{recipe.id === item.id ? item.comment : null}</div>
