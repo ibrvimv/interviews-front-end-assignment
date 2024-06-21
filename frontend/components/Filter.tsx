@@ -3,9 +3,10 @@ import Button from './Button';
 import FilterSelect from './FilterSelect';
 import Search from './Search';
 import { getCuisines, getDiets, getDifficulies } from '@/app/api/api';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCuisines, selectDiets, selectDifficulties, setCuisines, setDiets, setDifficulties, resetFilter, resetSearch } from '@/lib/features/recipeSlice';
+import gsap from 'gsap';
 
 type PropTypes = {
   handleSearch: () => void
@@ -15,6 +16,8 @@ type PropTypes = {
 }
 
 export default function Filter({ handleSearch, searchTerm, setSearchTerm, handleFilter }: PropTypes) {
+  const filterRef = useRef<HTMLDivElement>(null);
+
   const [selectedDiets, setSelectedDiets] = useState<string[]>([]);
   const [selectedCuisines, setSelectedCuisines] = useState<string[]>([]);
   const [selectedDifficulties, setSelectedDifficulties] = useState<string[]>([]);
@@ -58,8 +61,20 @@ export default function Filter({ handleSearch, searchTerm, setSearchTerm, handle
     dispatch(resetFilter());
   }
 
+
+  useEffect(() => {
+    const filter = filterRef.current;
+    if (filter) {
+      gsap.to(filter, {
+        opacity: 1,
+        y: 0,
+        duration: 2
+      });
+    }
+  }, []);
+
   return (
-    <div className='fixed top-40 left-8 z-40 block'>
+    <div className='fixed top-40 left-8 z-40 block opacity-0 -translate-y-10' ref={filterRef} >
       <div className='flex p-6 flex-col gap-7 rounded-xl border-4 border-white mb-2'>
         <Search handleSearch={handleSearch} searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       </div>

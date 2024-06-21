@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 import Filter from './Filter';
 import { getRecipeItems } from '@/app/api/api';
@@ -8,8 +8,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { appendRecipes, resetFilter, resetSearch, selectFilterResults, selectIsFiltering, selectIsSearching, selectRecipes, selectSearchResults, setFilterResults, setSearchResults } from '@/lib/features/recipeSlice';
 import ListItems from './ListItems';
 import { FilterCriteria } from '@/types/types';
+import gsap from 'gsap';
 
 const Home = () => {
+  const listRef = useRef<HTMLDivElement>(null);
+
   const dispatch = useDispatch();
   const data = useSelector(selectRecipes);
   const searchResults = useSelector(selectSearchResults);
@@ -76,6 +79,20 @@ const Home = () => {
     setLoading(false);
   };
 
+  //animation gsap 
+
+
+  useEffect(() => {
+    const list = listRef.current;
+    if (list) {
+      gsap.to(list, {
+        opacity: 1,
+        y: 0,
+        duration: 2
+      });
+    }
+  }, []);
+
   // chose which data to show: filtered, search or all. 
   // unfortinately i did not have time to mix search and filter to work together
 
@@ -86,11 +103,13 @@ const Home = () => {
   if (!displayedData) return <Loading />
   return (
     <>
-      <div className='flex gap-5'>
+      <div className='flex gap-5' >
         <div className='max-w-lg w-full relative'>
           <Filter handleFilter={handleFilter} handleSearch={handleSearch} searchTerm={searchTerm} setSearchTerm={handleSearchChange} />
         </div>
-        <ListItems displayedData={displayedData} loading={loading} />
+        <div ref={listRef} className='w-full opacity-0 translate-y-10'>
+          <ListItems displayedData={displayedData} loading={loading} />
+        </div>
       </div>
       <div ref={ref} />
     </>
