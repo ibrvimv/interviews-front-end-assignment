@@ -2,8 +2,14 @@ import React from 'react';
 import LevelButton from './LevelButton';
 import { FilterData } from '@/types/types';
 
+type FilterSelectProps = {
+  data: Array<FilterData>;
+  title: string;
+  selected: string[];
+  onSelect: (value: string) => void;
+};
 
-const FilterSelect = ({ data, title }: { data: Array<FilterData>, title: string }) => {
+const FilterSelect: React.FC<FilterSelectProps> = ({ data, title, selected, onSelect }) => {
   if (!data) return null;
   else {
     return (
@@ -13,7 +19,7 @@ const FilterSelect = ({ data, title }: { data: Array<FilterData>, title: string 
         </label>
         <div className='flex gap-2 max-w-md flex-wrap'>
           {data.map((item) => {
-            return <LevelButton level={item.name} key={item.id} />;
+            return <LevelButton isSelected={selected.includes(item.id)} onClick={() => onSelect(item.id)} level={item.name} key={item.id} />;
           })}
         </div>
       </div>

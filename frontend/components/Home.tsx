@@ -5,8 +5,9 @@ import Filter from './Filter';
 import { getRecipeItems } from '@/app/api/api';
 import Loading from './Loading';
 import { useDispatch, useSelector } from 'react-redux';
-import { appendRecipes, resetSearch, selectFilterResults, selectIsFiltering, selectIsSearching, selectRecipes, selectSearchResults, setSearchResults } from '@/lib/features/recipeSlice';
+import { appendRecipes, resetFilter, resetSearch, selectFilterResults, selectIsFiltering, selectIsSearching, selectRecipes, selectSearchResults, setFilterResults, setSearchResults } from '@/lib/features/recipeSlice';
 import ListItems from './ListItems';
+import { FilterCriteria } from '@/types/types';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -62,17 +63,32 @@ const Home = () => {
     }
   };
 
+  //filter methods
+
+  const handleFilter = async (filterCriteria: FilterCriteria) => {
+    setLoading(true);
+    if (filterCriteria) {
+      const filterData = await getRecipeItems(1, '', filterCriteria);
+      dispatch(setFilterResults(filterData));
+    } else {
+      dispatch(resetFilter())
+    }
+    setLoading(false);
+  };
+
   // chose which data to show: filtered, search or all. 
   // unfortinately i did not have time to mix search and filter to work together
 
-  const displayedData = isSearching ? searchResults : data;
+  // const displayedData = isSearching ? searchResults : data;
+  const displayedData = isSearching ? searchResults : (isFiltering ? filterResults : data);
+
 
   if (!displayedData) return <Loading />
   return (
     <>
       <div className='flex  gap-5'>
         <div className='max-w-lg w-full relative'>
-          <Filter handleSearch={handleSearch} searchTerm={searchTerm} setSearchTerm={handleSearchChange} />
+          <Filter handleFilter={handleFilter} handleSearch={handleSearch} searchTerm={searchTerm} setSearchTerm={handleSearchChange} />
         </div>
         <ListItems displayedData={displayedData} loading={loading} />
       </div>

@@ -28,3 +28,9 @@ export type Comment = {
   date:string;
 }
 export type Comments = Array<Comment>
+
+export type FilterCriteria = {
+  diets: string[];
+  cuisines: string[];
+  difficulties: string[];
+};

@@ -12,17 +12,20 @@ import {  Comments, Cuisines, Diets, Difficulties, RecipeItems } from "@/types/t
 // }
 
 
-export async function getRecipeItems(page: number, name?:string): Promise<RecipeItems> {
+export async function getRecipeItems(page: number, name?:string, filterCriteria?: { diets: string[], cuisines: string[], difficulties: string[]}): Promise<RecipeItems> {
 
   let url = `http://localhost:8080/recipes?_page=${page}&_limit=5`;
 
   if (name) {
     url += `&name=${encodeURIComponent(name)}`;
-    console.log(url)
   }
 
-  if(name === ''){
-    url = `http://localhost:8080/recipes?_page=${page}&_limit=5`
+  if (filterCriteria) {
+    const { diets, cuisines, difficulties } = filterCriteria;
+    if (diets.length) url += `&dietId=${diets.join(',')}`;
+    if (cuisines.length) url += `&cuisineId=${cuisines.join(',')}`;
+    if (difficulties.length) url += `&difficultyId=${difficulties.join(',')}`;
+    console.log(url)
   }
   const res = await fetch(url);
 

@@ -30,6 +30,7 @@ export const recipeSlice = createSlice({
   name: 'recipe',
   initialState,
   reducers: {
+		//list
 	  setRecipes: (state, action: PayloadAction<RecipeItems>) => {
       state.recipes = action.payload;
     },
@@ -48,6 +49,8 @@ export const recipeSlice = createSlice({
     appendRecipes: (state, action: PayloadAction<RecipeItems>) => {
       state.recipes = [...state.recipes, ...action.payload];
     },
+
+		//search
     setSearchResults: (state, action: PayloadAction<RecipeItems>) => {
       state.searchResults = action.payload;
       state.isSearching = true;
@@ -56,7 +59,8 @@ export const recipeSlice = createSlice({
       state.searchResults = [];
       state.isSearching = false;
     },
-	
+		
+		// filter
 		setFilterResults: (state, action: PayloadAction<RecipeItems>) => {
       state.filterResults = action.payload;
       state.isFiltering = true;
