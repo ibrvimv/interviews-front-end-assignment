@@ -1,55 +1,80 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { RecipeItems } from '@/types/types';
 import RecipeCard from './RecipeCard';
 import Filter from './Filter';
 import { getRecipeItems } from '@/app/api/api';
 import Loading from './Loading';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectRecipes, setRecipes } from '@/lib/features/recipeSlice';
+import { appendRecipes, resetSearch, selectIsSearching, selectRecipes, selectSearchResults, setRecipes, setSearchResults } from '@/lib/features/recipeSlice';
 
 const Home = () => {
   const dispatch = useDispatch();
   const data = useSelector(selectRecipes);
+  const searchResults = useSelector(selectSearchResults);
+  const isSearching = useSelector(selectIsSearching);
   const [page, setPage] = useState<number>(1);
   const [loading, setLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState<string>('');
 
   const { ref, inView } = useInView({
     threshold: 1,
   });
 
   useEffect(() => {
-    if (inView && !loading) {
+    if (inView && !loading && !isSearching) {
       loadMoreData();
     }
   }, [inView]);
 
   const loadMoreData = async () => {
     setLoading(true);
-    const newData = await getRecipeItems(page)
-
+    const newData = await getRecipeItems(page);
     if (newData) {
-      dispatch(setRecipes([...data, ...newData]));
+      dispatch(appendRecipes(newData));
       setPage(page + 1);
-      setLoading(false);
+    }
+    setLoading(false);
+  };
+
+  const handleSearch = async () => {
+    setLoading(true);
+    if (searchTerm) {
+      const searchData = await getRecipeItems(1, searchTerm);
+      dispatch(setSearchResults(searchData));
+    } else {
+      dispatch(resetSearch());
+    }
+    setLoading(false);
+  };
+
+  const handleSearchChange = (term: string) => {
+    setSearchTerm(term);
+    if (!term) {
+      dispatch(resetSearch());
     }
   };
 
-  if (!data) return <Loading />
+  const displayedData = isSearching ? searchResults : data;
+
+
+  console.log(displayedData)
+
+  if (!displayedData) return <Loading />
   return (
     <>
       <div className='flex  gap-5'>
         <div className='max-w-lg w-full relative'>
-          <Filter />
+          <Filter handleSearch={handleSearch} searchTerm={searchTerm} setSearchTerm={handleSearchChange} />
         </div>
         <div className='w-full'>
           <ul className='flex flex-col gap-5'>
-            {data && data.map((item, index) => (
+            {displayedData.map((item, index) => (
               <li key={index}>
                 <RecipeCard item={item} />
               </li>
-            ))}
+            ))
+            }
           </ul>
           {loading && <Loading />}
         </div>

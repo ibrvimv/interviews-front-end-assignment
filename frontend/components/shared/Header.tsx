@@ -10,6 +10,9 @@ import AddIcon from '@mui/icons-material/Add';
 export default function Header() {
   const pathname = usePathname();
 
+  const handleAddNewRecipe = () => {
+    console.log('Add new Item')
+  }
   return (
     <header className='flex items-center justify-between  sm:text-left h-28 px-8 fixed top-0 right-0 left-0 z-50'>
       <nav className='flex flex-row md:gap-4 items-end h-full'>
@@ -51,6 +54,7 @@ export default function Header() {
           alt='add new Item'
           text='Add New Recipe'
           value='add'
+          onClick={handleAddNewRecipe}
         />
 
         <div className='flex justify-center items-center w-[60px] aspect-square bg-pink rounded-full hover:bg-back border-2 border-pink transition-all duration-50'>

@@ -1,7 +1,15 @@
 import React from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import Button from './Button';
-const Search = () => {
+
+type PropTypes = {
+  handleSearch: () => void
+  searchTerm: string;
+  setSearchTerm: (newValue: string) => void;
+}
+
+const Search: React.FC<PropTypes> = ({ searchTerm, setSearchTerm, handleSearch }) => {
+
   return (
     <div id='search' className='relative'>
       <label className='block px-3 text-sm text-black  mb-3 relative max-w-md w-full '>
@@ -13,8 +21,10 @@ const Search = () => {
           id='searchByName'
           type='text'
           placeholder='Enter recipe name'
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <Button icon={SearchIcon} text='' value='' alt='' />
+        <Button icon={SearchIcon} text='' value='' alt='' onClick={handleSearch} />
       </div>
     </div>
   );

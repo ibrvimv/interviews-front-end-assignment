@@ -1,19 +1,30 @@
 import {  Comments, Cuisines, Diets, Difficulties, RecipeItems } from "@/types/types";
 
-export async function getInitialRecipeItems(): Promise<RecipeItems> {
-  const res = await fetch(`http://localhost:8080/recipes?_page=1&_limit=5`);
+// export async function getInitialRecipeItems(): Promise<RecipeItems> {
+//   const res = await fetch(`http://localhost:8080/recipes?_page=1&_limit=5`);
 
-  if (!res.ok) {
-    throw new Error(`HTTP error! Status: ${res.status}`);
+//   if (!res.ok) {
+//     throw new Error(`HTTP error! Status: ${res.status}`);
+//   }
+
+//   const data: RecipeItems = await res.json();
+//   return data;
+// }
+
+
+export async function getRecipeItems(page: number, name?:string): Promise<RecipeItems> {
+
+  let url = `http://localhost:8080/recipes?_page=${page}&_limit=5`;
+
+  if (name) {
+    url += `&name=${encodeURIComponent(name)}`;
+    console.log(url)
   }
 
-  const data: RecipeItems = await res.json();
-  return data;
-}
-
-
-export async function getRecipeItems(page: number): Promise<RecipeItems> {
-  const res = await fetch(`http://localhost:8080/recipes?_page=${page}&_limit=5`);
+  if(name === ''){
+    url = `http://localhost:8080/recipes?_page=${page}&_limit=5`
+  }
+  const res = await fetch(url);
 
   if (!res.ok) {
     throw new Error(`HTTP error! Status: ${res.status}`);
@@ -72,13 +83,13 @@ export async function getComments(): Promise<Comments> {
 
 //Serach
 
-export async function getRecipeByName(name: string): Promise<RecipeItems> {
-  const res = await fetch(`http://localhost:8080/recipes?_page=1&_limit=5&name=${encodeURIComponent(name)}`);
+// export async function getRecipesByName(name: string, page: number): Promise<RecipeItems> {
+//   const res = await fetch(`http://localhost:8080/recipes?_page=${page}&_limit=5&name=${encodeURIComponent(name)}`);
 
-  if (!res.ok) {
-    throw new Error(`HTTP error! Status: ${res.status}`);
-  }
+//   if (!res.ok) {
+//     throw new Error(`HTTP error! Status: ${res.status}`);
+//   }
 
-  const data: RecipeItems = await res.json();
-  return data;
-}
+//   const data: RecipeItems = await res.json();
+//   return data;
+// }
