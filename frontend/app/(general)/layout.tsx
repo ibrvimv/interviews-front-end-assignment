@@ -21,7 +21,7 @@ export default async function RootLayout({
         <main className='mt-40 px-8'>{children}</main>
       </div>
       <Footer />
-      {/* <LenisScroll /> */}
+      <LenisScroll />
     </main>
   );
 }
