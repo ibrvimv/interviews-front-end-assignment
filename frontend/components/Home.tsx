@@ -9,13 +9,7 @@ import Loading from './Loading';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectRecipes, setRecipes } from '@/lib/features/recipeSlice';
 
-
-// used this component separate from main home page because:
-// I did not wanted to ruin SEO by making home page client component.
-// So I am loading initial data of 5 items on server side, then load others in this component.
-// Here I used react-intersection-observer to fetch new portion of data only when you scroll and reach the bottom side of the page.
-
-const Home = ({ initialData }: { initialData: RecipeItems }) => {
+const Home = () => {
   const dispatch = useDispatch();
   const data = useSelector(selectRecipes);
   const [page, setPage] = useState<number>(1);
@@ -24,10 +18,6 @@ const Home = ({ initialData }: { initialData: RecipeItems }) => {
   const { ref, inView } = useInView({
     threshold: 1,
   });
-
-  useEffect(() => {
-    dispatch(setRecipes(initialData));
-  }, [initialData, dispatch]);
 
   useEffect(() => {
     if (inView && !loading) {
@@ -43,10 +33,10 @@ const Home = ({ initialData }: { initialData: RecipeItems }) => {
       dispatch(setRecipes([...data, ...newData]));
       setPage(page + 1);
       setLoading(false);
-      console.log('done')
     }
   };
 
+  if (!data) return <Loading />
   return (
     <>
       <div className='flex  gap-5'>

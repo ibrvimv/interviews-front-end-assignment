@@ -24,16 +24,16 @@ export const recipeSlice = createSlice({
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
-		addRecipe: (state, action: PayloadAction<RecipeItem>) => {
-      state.recipes.push(action.payload);
-    },
+		// addRecipe: (state, action: PayloadAction<RecipeItem>) => {
+    //   state.recipes.push(action.payload);
+    // },
 		setRecipes: (state, action: PayloadAction<RecipeItems>) => {
- 			state.recipes =  action.payload
+			state.recipes = action.payload
     }
   },
 })
 
-export const { addRecipe, setRecipes } = recipeSlice.actions;
+export const {  setRecipes } = recipeSlice.actions;
 // Other code such as selectors can use the imported `RootState` type
 export const selectRecipes = (state: RootState) => state.recipes;
 
