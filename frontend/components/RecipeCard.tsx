@@ -3,11 +3,26 @@ import { RecipeItem } from '@/types/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import Loading from './Loading';
+import { selectDiets, selectDifficulties } from '@/lib/features/recipeSlice';
+import { useSelector } from 'react-redux';
+
+// mapper
+function mapIdToName(id: string, mapper: { id: string, name: string }[]) {
+  const item = mapper.find(item => item.id === id);
+  return item ? item.name : "Unknown";
+};
 
 const RecipeCard = ({ item }: { item: RecipeItem }) => {
+
+  const diets = useSelector(selectDiets)
+  const difficulties = useSelector(selectDifficulties)
+  const dietName = mapIdToName(item.dietId, diets);
+  const difficultyName = mapIdToName(item.difficultyId, difficulties);
+
   if (!item) {
     return <Loading />;
   } else
+
     return (
       <Link href={`/recipes/${item.id}`}>
         <div className='flex items-center gap-5 bg-white hover:shadow-2xl hover:shadow-green transition-all duration-50 rounded-xl'>
@@ -33,8 +48,8 @@ const RecipeCard = ({ item }: { item: RecipeItem }) => {
                 })}
               </div> */}
               <div className='flex gap-5'>
-                <p className='text-xs font-thin'>diet: {item.dietId}</p>
-                <p className='text-xs font-thin'>difficulty: {item.difficultyId}</p>
+                <p className='text-xs font-thin'>diet: {dietName}</p>
+                <p className='text-xs font-thin'>difficulty: {difficultyName}</p>
               </div>
             </div>
           </div>

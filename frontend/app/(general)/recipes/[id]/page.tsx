@@ -1,8 +1,29 @@
+
 import { Comments, RecipeItem } from '@/types/types';
 import Image from 'next/image';
 import { GetStaticPropsContext } from 'next';
 import { getComments } from '@/app/api/api';
 import Loading from '@/components/Loading';
+import { useSelector } from 'react-redux';
+import { selectDiets, selectDifficulties } from '@/lib/features/recipeSlice';
+
+const diets = [
+  { id: "1", name: "Vegetarian" },
+  { id: "2", name: "Mediterranean" },
+  { id: "3", name: "Non-Vegetarian" },
+  { id: "4", name: "Pescatarian" }
+];
+
+const difficulties = [
+  { id: "1", name: "Easy" },
+  { id: "2", name: "Medium" },
+  { id: "3", name: "Hard" }
+];
+// mapper
+function mapIdToName(id: string, mapper: { id: string, name: string }[]) {
+  const item = mapper.find(item => item.id === id);
+  return item ? item.name : "Unknown";
+};
 
 export async function generateStaticParams() {
   const posts: Array<RecipeItem> = await fetch('http://localhost:8080/recipes').then((res) => res.json())
@@ -20,6 +41,11 @@ const fetchRecipe = async (id: string): Promise<RecipeItem> => {
 const RecipePage = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
   const recipe = await fetchRecipe(id);
+
+
+  const dietName = mapIdToName(recipe.dietId, diets);
+  const difficultyName = mapIdToName(recipe.difficultyId, difficulties);
+
 
   if (!recipe) {
     return <Loading />;
@@ -52,8 +78,8 @@ const RecipePage = async ({ params }: { params: { id: string } }) => {
               </div>
             </div>
             <div className='flex gap-5'>
-              <p className='text-md font-thin uppercase'>diet: {recipe.dietId}</p>
-              <p className='text-md font-thin uppercase'>difficulty: {recipe.difficultyId}</p>
+              <p className='text-md font-thin uppercase'>diet: {dietName}</p>
+              <p className='text-md font-thin uppercase'>difficulty: {difficultyName}</p>
             </div>
           </div>
         </div>
@@ -67,7 +93,7 @@ const RecipePage = async ({ params }: { params: { id: string } }) => {
                 <div className='flex flex-col'>
                   <div>{recipe.id === item.id ? item.comment : null}</div>
                   <div> {recipe.id === item.id ? item.rating + ' Stars' : null}</div>
-                  <div>  {recipe.id === item.id ? item.date : null}</div>
+                  {/* <div>  {recipe.id === item.id ? item.date : null}</div> */}
                 </div>
               </div>
             })
