@@ -8,10 +8,12 @@ type RecipeBookState = {
 	diets: Diets;
 	cuisines: Cuisines;
 	difficulties: Difficulties;
-	searchResults:RecipeItems;
+	searchResults: RecipeItems;
 	isSearching: boolean;
+	filterResults:RecipeItems;
+	isFiltering: boolean;
 }
-// Define the initial state using that type
+
 const initialState:RecipeBookState  = {
 	recipes:[],
 	comments:[],
@@ -20,17 +22,28 @@ const initialState:RecipeBookState  = {
 	difficulties:[],
 	searchResults: [],
   isSearching: false,
+	filterResults: [],
+  isFiltering: false,
 }
 
 export const recipeSlice = createSlice({
   name: 'recipe',
   initialState,
   reducers: {
-		// addRecipe: (state, action: PayloadAction<RecipeItem>) => {
-    //   state.recipes.push(action.payload);
-    // },
 	  setRecipes: (state, action: PayloadAction<RecipeItems>) => {
       state.recipes = action.payload;
+    },
+		setComments: (state, action: PayloadAction<Comments>) => {
+      state.comments = action.payload;
+    },
+		setDiets: (state, action: PayloadAction<Diets>) => {
+      state.diets = action.payload;
+    },
+		setCuisines: (state, action: PayloadAction<Cuisines>) => {
+      state.cuisines = action.payload;
+    },
+		setDifficulties: (state, action: PayloadAction<Difficulties>) => {
+      state.difficulties = action.payload;
     },
     appendRecipes: (state, action: PayloadAction<RecipeItems>) => {
       state.recipes = [...state.recipes, ...action.payload];
@@ -42,15 +55,30 @@ export const recipeSlice = createSlice({
     resetSearch: (state) => {
       state.searchResults = [];
       state.isSearching = false;
+    },
+	
+		setFilterResults: (state, action: PayloadAction<RecipeItems>) => {
+      state.filterResults = action.payload;
+      state.isFiltering = true;
+    },
+    resetFilter: (state) => {
+      state.filterResults = [];
+      state.isFiltering = false;
     }
   },
 })
 
-export const {  setRecipes, appendRecipes, setSearchResults, resetSearch } = recipeSlice.actions;
-// Other code such as selectors can use the imported `RootState` type
+export const {  setRecipes, appendRecipes, setSearchResults, resetSearch, setFilterResults, resetFilter, setComments,setCuisines,setDiets,setDifficulties } = recipeSlice.actions;
+
 export const selectRecipes = (state: RootState) => state.recipes;
 export const selectSearchResults = (state: RootState) => state.searchResults;
 export const selectIsSearching = (state: RootState) => state.isSearching;
+export const selectFilterResults = (state: RootState) => state.filterResults;
+export const selectIsFiltering = (state: RootState) => state.isFiltering;
+export const selectComments = (state: RootState) => state.comments;
+export const selectDiets = (state: RootState) => state.diets;
+export const selectDifficulties = (state: RootState) => state.difficulties;
+export const selectCuisines= (state: RootState) => state.cuisines;
 
 
 export default recipeSlice.reducer

@@ -3,7 +3,9 @@ import Button from './Button';
 import FilterSelect from './FilterSelect';
 import Search from './Search';
 import { getCuisines, getDiets, getDifficulies } from '@/app/api/api';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCuisines, selectDiets, selectDifficulties, setCuisines, setDiets, setDifficulties, } from '@/lib/features/recipeSlice';
 
 type PropTypes = {
   handleSearch: () => void
@@ -13,19 +15,20 @@ type PropTypes = {
 
 export default function Filter({ handleSearch, searchTerm, setSearchTerm }: PropTypes) {
 
+  const dispatch = useDispatch();
+  const diets = useSelector(selectDiets);
+  const cuisines = useSelector(selectCuisines);
+  const difficulties = useSelector(selectDifficulties);
 
-  const [cuisines, setCuisines] = useState<Cuisines>([]);
-  const [diets, setDiets] = useState<Diets>([]);
-  const [difficulties, setDifficulties] = useState<Difficulties>([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const cuisines: Cuisines = await getCuisines();
-      const diets: Diets = await getDiets();
-      const difficulties: Difficulties = await getDifficulies();
-      setCuisines(cuisines)
-      setDiets(diets)
-      setDifficulties(difficulties)
+      const cuisinesData: Cuisines = await getCuisines();
+      const dietsData: Diets = await getDiets();
+      const difficultiesData: Difficulties = await getDifficulies();
+      dispatch(setCuisines(cuisinesData))
+      dispatch(setDiets(dietsData))
+      dispatch(setDifficulties(difficultiesData))
     };
 
     fetchData();
@@ -50,3 +53,4 @@ export default function Filter({ handleSearch, searchTerm, setSearchTerm }: Prop
     </div>
   );
 }
+
