@@ -12,6 +12,7 @@ type RecipeBookState = {
 	isSearching: boolean;
 	filterResults:RecipeItems;
 	isFiltering: boolean;
+	modal:boolean;
 }
 
 const initialState:RecipeBookState  = {
@@ -24,6 +25,7 @@ const initialState:RecipeBookState  = {
   isSearching: false,
 	filterResults: [],
   isFiltering: false,
+	modal: false,
 }
 
 export const recipeSlice = createSlice({
@@ -59,7 +61,7 @@ export const recipeSlice = createSlice({
       state.searchResults = [];
       state.isSearching = false;
     },
-		
+
 		// filter
 		setFilterResults: (state, action: PayloadAction<RecipeItems>) => {
       state.filterResults = action.payload;
@@ -68,21 +70,35 @@ export const recipeSlice = createSlice({
     resetFilter: (state) => {
       state.filterResults = [];
       state.isFiltering = false;
-    }
+    },
+
+		//modal
+		openModal: (state) => {
+			state.modal = true
+		},
+		closeModal: (state) => {
+			state.modal = false
+		}
   },
 })
 
-export const {  setRecipes, appendRecipes, setSearchResults, resetSearch, setFilterResults, resetFilter, setComments,setCuisines,setDiets,setDifficulties } = recipeSlice.actions;
+export const {  setRecipes, appendRecipes, setSearchResults, resetSearch, setFilterResults, resetFilter, setComments,setCuisines,setDiets,setDifficulties,openModal, closeModal } = recipeSlice.actions;
 
 export const selectRecipes = (state: RootState) => state.recipes;
+
 export const selectSearchResults = (state: RootState) => state.searchResults;
 export const selectIsSearching = (state: RootState) => state.isSearching;
+
 export const selectFilterResults = (state: RootState) => state.filterResults;
 export const selectIsFiltering = (state: RootState) => state.isFiltering;
+
 export const selectComments = (state: RootState) => state.comments;
+
 export const selectDiets = (state: RootState) => state.diets;
 export const selectDifficulties = (state: RootState) => state.difficulties;
 export const selectCuisines= (state: RootState) => state.cuisines;
+
+export const selectModal= (state: RootState) => state.modal;
 
 
 export default recipeSlice.reducer

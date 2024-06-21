@@ -6,15 +6,18 @@ import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import Button from '../Button';
 import AddIcon from '@mui/icons-material/Add';
+import { useDispatch } from 'react-redux';
+import { openModal } from '@/lib/features/recipeSlice';
 
 export default function Header() {
+  const dispatch = useDispatch()
   const pathname = usePathname();
 
   const handleAddNewRecipe = () => {
-    console.log('Add new Item')
+    dispatch(openModal())
   }
   return (
-    <header className='flex items-center justify-between  sm:text-left h-28 px-8 fixed top-0 right-0 left-0 z-50'>
+    <header className='flex items-center justify-between  sm:text-left h-28 px-8 fixed top-0 right-0 left-0 z-30'>
       <nav className='flex flex-row md:gap-4 items-end h-full'>
         {/* Logo */}
 

@@ -86,7 +86,7 @@ const Home = () => {
   if (!displayedData) return <Loading />
   return (
     <>
-      <div className='flex  gap-5'>
+      <div className='flex gap-5'>
         <div className='max-w-lg w-full relative'>
           <Filter handleFilter={handleFilter} handleSearch={handleSearch} searchTerm={searchTerm} setSearchTerm={handleSearchChange} />
         </div>
