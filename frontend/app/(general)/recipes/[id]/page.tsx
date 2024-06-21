@@ -2,6 +2,7 @@ import { Comments, RecipeItem } from '@/types/types';
 import Image from 'next/image';
 import { GetStaticPropsContext } from 'next';
 import { getComments } from '@/app/api/api';
+import Loading from '@/components/Loading';
 
 export async function generateStaticParams() {
   const posts: Array<RecipeItem> = await fetch('http://localhost:8080/recipes').then((res) => res.json())
@@ -21,7 +22,7 @@ const RecipePage = async ({ params }: { params: { id: string } }) => {
   const recipe = await fetchRecipe(id);
 
   if (!recipe) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   const comments: Comments = await getComments()

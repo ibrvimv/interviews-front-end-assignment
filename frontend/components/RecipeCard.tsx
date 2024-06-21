@@ -2,10 +2,11 @@ import React from 'react';
 import { RecipeItem } from '@/types/types';
 import Image from 'next/image';
 import Link from 'next/link';
+import Loading from './Loading';
 
 const RecipeCard = ({ item }: { item: RecipeItem }) => {
   if (!item) {
-    return <p>Loading...</p>;
+    return <Loading />;
   } else
     return (
       <Link href={`/recipes/${item.id}`}>

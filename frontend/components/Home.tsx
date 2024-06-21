@@ -5,6 +5,8 @@ import { useInView } from 'react-intersection-observer';
 import { RecipeItems } from '@/types/types';
 import RecipeCard from './RecipeCard';
 import Filter from './Filter';
+import { getRecipeItems } from '@/app/api/api';
+import Loading from './Loading';
 
 
 // used this component separate from main home page because:
@@ -29,10 +31,7 @@ const Home = ({ initialData }: { initialData: RecipeItems }) => {
 
   const loadMoreData = async () => {
     setLoading(true);
-    const res = await fetch(
-      `http://localhost:8080/recipes?_page=${page + 1}&_limit=5`
-    );
-    const newData = await res.json();
+    const newData = await getRecipeItems(page)
     setData((prevData) => [...prevData, ...newData]);
     setPage(page + 1);
     setLoading(false);
@@ -52,11 +51,7 @@ const Home = ({ initialData }: { initialData: RecipeItems }) => {
               </li>
             ))}
           </ul>
-          {loading && (
-            <div className='flex items-center justify-center h-52'>
-              <p>Loading...</p>
-            </div>
-          )}
+          {loading && <Loading />}
         </div>
       </div>
       <div ref={ref} />
