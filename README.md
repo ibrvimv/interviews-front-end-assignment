@@ -100,4 +100,33 @@ comments.
 
 ## How to run
 
-...
+1. Run Server
+
+Navigate to the server folder:
+Use the command cd server in your terminal.
+
+Install dependencies:
+Run npm install to ensure all required packages are installed.
+
+Start the server:
+Execute npm run start.
+
+Confirm server is running:
+You should see the message 'Server is running on http://localhost:8080'.
+
+2. Run Frontend
+
+Open a new terminal window/tab.
+
+Navigate to the frontend folder:
+Use cd frontend command in your terminal.
+
+Install dependencies for the frontend:
+Run npm install to install necessary packages.
+
+Start the frontend:
+Type npm run dev to start the frontend development server.
+
+Access the frontend:
+Your frontend application will be available at http://localhost:3000.
+
