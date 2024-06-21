@@ -34,3 +34,14 @@ export type FilterCriteria = {
   cuisines: string[];
   difficulties: string[];
 };
+
+export type RecipeFormData = {
+    id:string;
+    name: string;
+    instructions: string;
+    ingredients: string; // Comma-separated string from form
+    cuisineId: string;
+    dietId: string;
+    difficultyId: string;
+    image: FileList;
+};

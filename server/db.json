@@ -351,6 +351,18 @@
       "dietId": "3",
       "difficultyId": "1",
       "image": "/uploads/Pasta-Primavera-f.jpg"
+    },
+    {
+      "id": "1718998798137",
+      "name": "Test",
+      "ingredients": [
+        "[\"1 2 3 4 5\"]"
+      ],
+      "instructions": "Test",
+      "cuisineId": "1",
+      "dietId": "1",
+      "difficultyId": "1",
+      "image": "/uploads/1718998798134.jpg"
     }
   ],
   "comments": [
