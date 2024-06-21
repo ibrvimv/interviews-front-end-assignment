@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { RecipeItems } from '@/types/types';
 import RecipeCard from './RecipeCard';
-import FilterModal from './FilterModal';
+import Filter from './Filter';
 
 
 // used this component separate from main home page because:
@@ -42,7 +42,7 @@ const Home = ({ initialData }: { initialData: RecipeItems }) => {
     <>
       <div className='flex  gap-5'>
         <div className='max-w-lg w-full relative'>
-          <FilterModal />
+          <Filter />
         </div>
         <div className='w-full'>
           <ul className='flex flex-col gap-5'>

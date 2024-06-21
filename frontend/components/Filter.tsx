@@ -5,7 +5,7 @@ import Search from './Search';
 import { getCuisines, getDiets, getDifficulies } from '@/app/api/api';
 import { useEffect, useState } from 'react';
 
-export default function FilterModal() {
+export default function Filter() {
 
 
   const [cuisines, setCuisines] = useState<Cuisines>([]);
