@@ -53,6 +53,7 @@ export default function Filter({ handleSearch, searchTerm, setSearchTerm, handle
     setSelectedDiets([]);
     setSelectedCuisines([]);
     setSelectedDifficulties([]);
+    setSearchTerm('');
     dispatch(resetSearch());
     dispatch(resetFilter());
   }
