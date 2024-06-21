@@ -6,6 +6,8 @@ import RecipeCard from './RecipeCard';
 import Filter from './Filter';
 import { getRecipeItems } from '@/app/api/api';
 import Loading from './Loading';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectRecipes, setRecipes } from '@/lib/features/recipeSlice';
 
 
 // used this component separate from main home page because:
@@ -14,13 +16,18 @@ import Loading from './Loading';
 // Here I used react-intersection-observer to fetch new portion of data only when you scroll and reach the bottom side of the page.
 
 const Home = ({ initialData }: { initialData: RecipeItems }) => {
-  const [data, setData] = useState(initialData);
+  const dispatch = useDispatch();
+  const data = useSelector(selectRecipes);
   const [page, setPage] = useState<number>(1);
   const [loading, setLoading] = useState(false);
 
   const { ref, inView } = useInView({
     threshold: 1,
   });
+
+  useEffect(() => {
+    dispatch(setRecipes(initialData));
+  }, [initialData, dispatch]);
 
   useEffect(() => {
     if (inView && !loading) {
@@ -31,9 +38,13 @@ const Home = ({ initialData }: { initialData: RecipeItems }) => {
   const loadMoreData = async () => {
     setLoading(true);
     const newData = await getRecipeItems(page)
-    setData((prevData) => [...prevData, ...newData]);
-    setPage(page + 1);
-    setLoading(false);
+
+    if (newData) {
+      dispatch(setRecipes([...data, ...newData]));
+      setPage(page + 1);
+      setLoading(false);
+      console.log('done')
+    }
   };
 
   return (
@@ -44,7 +55,7 @@ const Home = ({ initialData }: { initialData: RecipeItems }) => {
         </div>
         <div className='w-full'>
           <ul className='flex flex-col gap-5'>
-            {data.map((item, index) => (
+            {data && data.map((item, index) => (
               <li key={index}>
                 <RecipeCard item={item} />
               </li>
