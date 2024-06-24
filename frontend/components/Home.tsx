@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useInView } from 'react-intersection-observer';
 import Filter from './Filter';
 import { getRecipeItems } from '@/app/api/api';
@@ -29,56 +29,71 @@ const Home = () => {
   });
 
   // each time inView changes it trigger loadMoreData()
+
+
+  //this method fetches 5 items and append new data to previous
+  const loadMoreData = useCallback(async () => {
+    setLoading(true);
+    try {
+      const newData = await getRecipeItems(page);
+      if (newData) {
+        dispatch(appendRecipes(newData));
+        setPage(prevPage => prevPage + 1);
+      }
+    } catch (error) {
+      console.error('Failed to load more data:', error);
+    } finally {
+      setLoading(false);
+    }
+  }, [page, dispatch]);
+
   useEffect(() => {
     if (inView && !loading && !isSearching) {
       loadMoreData();
     }
   }, [inView]);
-
-  //this method fetches 5 items and append new data to previous
-  const loadMoreData = async () => {
-    setLoading(true);
-    const newData = await getRecipeItems(page);
-    if (newData) {
-      dispatch(appendRecipes(newData));
-      setPage(page + 1);
-    }
-    setLoading(false);
-  };
-
   //search methods
-  const handleSearch = async () => {
+
+  const handleSearch = useCallback(async () => {
     setLoading(true);
-    if (searchTerm) {
-      const searchData = await getRecipeItems(1, searchTerm);
-      dispatch(setSearchResults(searchData));
-    } else {
-      dispatch(resetSearch());
+    try {
+      if (searchTerm) {
+        const searchData = await getRecipeItems(1, searchTerm);
+        dispatch(setSearchResults(searchData));
+      } else {
+        dispatch(resetSearch());
+      }
+    } catch (error) {
+      console.error('Search failed:', error);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
-  };
+  }, [searchTerm, dispatch]);
 
-
-  const handleSearchChange = (term: string) => {
+  const handleSearchChange = useCallback((term: string) => {
     setSearchTerm(term);
     if (!term) {
       dispatch(resetSearch());
     }
-  };
+  }, [dispatch]);
 
   //filter methods
 
-  const handleFilter = async (filterCriteria: FilterCriteria) => {
+  const handleFilter = useCallback(async (filterCriteria: FilterCriteria) => {
     setLoading(true);
-    if (filterCriteria) {
-      const filterData = await getRecipeItems(1, '', filterCriteria);
-      dispatch(setFilterResults(filterData));
-    } else {
-      dispatch(resetFilter())
+    try {
+      if (filterCriteria) {
+        const filterData = await getRecipeItems(1, '', filterCriteria);
+        dispatch(setFilterResults(filterData));
+      } else {
+        dispatch(resetFilter());
+      }
+    } catch (error) {
+      console.error('Filter failed:', error);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
-  };
-
+  }, [dispatch]);
   //animation gsap 
 
 
