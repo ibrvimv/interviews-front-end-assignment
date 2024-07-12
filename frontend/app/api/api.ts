@@ -1,4 +1,5 @@
-import {  Comments, Cuisines, Diets, Difficulties, RecipeItems } from "@/types/types";
+import {  Comments, Cuisines, Diets, Difficulties, RecipeItems, RecipeItem } from "@/types/types";
+
 
 // export async function getInitialRecipeItems(): Promise<RecipeItems> {
 //   const res = await fetch(`http://localhost:8080/recipes?_page=1&_limit=5`);
@@ -84,15 +85,21 @@ export async function getComments(): Promise<Comments> {
 }
 
 
-//Serach
 
-// export async function getRecipesByName(name: string, page: number): Promise<RecipeItems> {
-//   const res = await fetch(`http://localhost:8080/recipes?_page=${page}&_limit=5&name=${encodeURIComponent(name)}`);
+export async function fetchRecipe(id: string): Promise<RecipeItem> {
+  const res = await fetch(`http://localhost:8080/recipes/${id}`);
+  if (!res.ok) {
+    throw new Error('Failed to fetch recipe');
+  }
+  const data = await res.json();
+  return data;
+}
 
-//   if (!res.ok) {
-//     throw new Error(`HTTP error! Status: ${res.status}`);
-//   }
-
-//   const data: RecipeItems = await res.json();
-//   return data;
-// }
+export async function fetchComments(): Promise<Comments> {
+  const res = await fetch('http://localhost:8080/comments');
+  if (!res.ok) {
+    throw new Error('Failed to fetch comments');
+  }
+  const data = await res.json();
+  return data;
+}

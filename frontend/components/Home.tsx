@@ -2,13 +2,13 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useInView } from 'react-intersection-observer';
 import Filter from './Filter';
-import { getRecipeItems } from '@/app/api/api';
 import Loading from './Loading';
 import { useDispatch, useSelector } from 'react-redux';
 import { appendRecipes, resetFilter, resetSearch, selectFilterResults, selectIsFiltering, selectIsSearching, selectRecipes, selectSearchResults, setFilterResults, setSearchResults } from '@/lib/features/recipeSlice';
 import ListItems from './ListItems';
 import { FilterCriteria } from '@/types/types';
 import gsap from 'gsap';
+import { fetchRecipes, searchRecipes, filterRecipes } from '@/app/actions';
 
 const Home = () => {
   const listRef = useRef<HTMLDivElement>(null);
@@ -35,7 +35,7 @@ const Home = () => {
   const loadMoreData = useCallback(async () => {
     setLoading(true);
     try {
-      const newData = await getRecipeItems(page);
+      const newData = await fetchRecipes(page);
       if (newData) {
         dispatch(appendRecipes(newData));
         setPage(prevPage => prevPage + 1);
@@ -46,6 +46,7 @@ const Home = () => {
       setLoading(false);
     }
   }, [page, dispatch]);
+
 
   useEffect(() => {
     if (inView && !loading && !isSearching) {
@@ -58,7 +59,7 @@ const Home = () => {
     setLoading(true);
     try {
       if (searchTerm) {
-        const searchData = await getRecipeItems(1, searchTerm);
+        const searchData = await searchRecipes(searchTerm)
         dispatch(setSearchResults(searchData));
       } else {
         dispatch(resetSearch());
@@ -83,7 +84,7 @@ const Home = () => {
     setLoading(true);
     try {
       if (filterCriteria) {
-        const filterData = await getRecipeItems(1, '', filterCriteria);
+        const filterData = await filterRecipes(filterCriteria);
         dispatch(setFilterResults(filterData));
       } else {
         dispatch(resetFilter());
@@ -98,6 +99,7 @@ const Home = () => {
 
 
   useEffect(() => {
+    loadMoreData()
     const list = listRef.current;
     if (list) {
       gsap.to(list, {
