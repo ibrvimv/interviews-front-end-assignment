@@ -98,6 +98,7 @@ const Home = () => {
 
 
   useEffect(() => {
+    loadMoreData()
     const list = listRef.current;
     if (list) {
       gsap.to(list, {
