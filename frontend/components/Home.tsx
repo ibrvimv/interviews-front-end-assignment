@@ -52,6 +52,7 @@ const Home = () => {
       loadMoreData();
     }
   }, [inView]);
+
   //search methods
 
   const handleSearch = useCallback(async () => {
@@ -94,11 +95,11 @@ const Home = () => {
       setLoading(false);
     }
   }, [dispatch]);
+
   //animation gsap 
 
-
   useEffect(() => {
-    loadMoreData()
+    // loadMoreData()
     const list = listRef.current;
     if (list) {
       gsap.to(list, {
@@ -111,8 +112,8 @@ const Home = () => {
 
   // chose which data to show: filtered, search or all. 
   // unfortinately i did not have time to mix search and filter to work together
-
   // const displayedData = isSearching ? searchResults : data;
+
   const displayedData = isSearching ? searchResults : (isFiltering ? filterResults : data);
 
 
